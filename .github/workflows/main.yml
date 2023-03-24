@@ -1,0 +1,22 @@
+name: GitHub Pages Deploy
+on:
+  push:
+    branches:
+      - main # branch do repositório
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Build and Deploy
+        run: |
+          npm install
+          npm run build
+          npm run deploy # ou o comando para publicar o site
+        env:
+          NODE_ENV: production
